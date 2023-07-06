@@ -7,7 +7,7 @@ function signToken(payload) {
 }
 
 function checkToken(token) {
-  return jwt.verify(token, JWT_SECRET);
+  return jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
 }
 
 module.exports = {

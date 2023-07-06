@@ -16,7 +16,7 @@ const createMovie = (req, res, next) => {
   const newMovie = req.body;
 
   Movie.create({ ...newMovie, owner: req.user._id })
-    .then((movie) => res.status(200).send(movie))
+    .then((movie) => res.status(201).send(movie))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         return next(new ValidationError('Переданы некорректные данные при создании фильма'));

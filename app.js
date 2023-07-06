@@ -10,7 +10,7 @@ const { validationCreateUser, validationLogin } = require('./middlewares/joiVali
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
-const { PORT, DB_URL } = process.env;
+const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 const app = express();
 
 app.use(express.json());
