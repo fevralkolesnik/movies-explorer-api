@@ -25,7 +25,6 @@ const createMovie = (req, res, next) => {
     });
 };
 
-// looking after all
 const deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
 
