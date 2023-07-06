@@ -13,9 +13,9 @@ const getMovies = (req, res, next) => {
 };
 
 const createMovie = (req, res, next) => {
-  const { name, link } = req.body;
+  const newMovie = req.body;
 
-  Movie.create({ name, link, owner: req.user._id })
+  Movie.create({ ...newMovie, owner: req.user._id })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
