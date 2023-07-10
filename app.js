@@ -16,7 +16,7 @@ app.use(express.json());
 
 mongoose.connect(DB_URL);
 
-app.use(helmet);
+app.use(helmet());
 app.use(cors);
 
 app.use(requestLogger);
