@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
-
-const RegExpURL = /^(https?:\/\/(www\.)?)([-a-zA-Z0-9\W]){1,}/;
-const RegExpEN = /[A-z]/;
-const RegExpRU = /[А-я]/;
+const { RegExp } = require('../utils/const');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -29,21 +26,21 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => RegExpURL.test(url),
+      validator: (url) => RegExp.URL.test(url),
     },
   },
   trailerLink: {
     type: String,
     required: true,
     validate: {
-      validator: (url) => RegExpURL.test(url),
+      validator: (url) => RegExp.URL.test(url),
     },
   },
   thumbnail: {
     type: String,
     required: true,
     validate: {
-      validator: (url) => RegExpURL.test(url),
+      validator: (url) => RegExp.URL.test(url),
     },
   },
   owner: {
@@ -59,14 +56,14 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (name) => RegExpRU.test(name),
+      validator: (name) => RegExp.RU.test(name),
     },
   },
   nameEN: {
     type: String,
     required: true,
     validate: {
-      validator: (name) => RegExpEN.test(name),
+      validator: (name) => RegExp.EN.test(name),
     },
   },
 });

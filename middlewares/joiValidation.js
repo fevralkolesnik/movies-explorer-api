@@ -1,8 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-
-const RegExpURL = /^(https?:\/\/(www\.)?)([-a-zA-Z0-9\W]){1,}/;
-const RegExpEN = /[A-z]/;
-const RegExpRU = /[А-я]/;
+const { RegExp } = require('../utils/const');
 
 const validationCreateUser = celebrate({
   body: Joi.object().keys({
@@ -33,12 +30,12 @@ const validationCreateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required().min(4),
     description: Joi.string().required().min(20),
-    image: Joi.string().required().regex(RegExpURL),
-    trailerLink: Joi.string().required().regex(RegExpURL),
-    thumbnail: Joi.string().required().regex(RegExpURL),
+    image: Joi.string().required().regex(RegExp.URL),
+    trailerLink: Joi.string().required().regex(RegExp.URL),
+    thumbnail: Joi.string().required().regex(RegExp.URL),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required().min(3).regex(RegExpRU),
-    nameEN: Joi.string().required().min(3).regex(RegExpEN),
+    nameRU: Joi.string().required().min(3).regex(RegExp.RU),
+    nameEN: Joi.string().required().min(3).regex(RegExp.EN),
   }),
 });
 

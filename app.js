@@ -1,12 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const { errors } = require('celebrate');
-const DocumentNotFoundError = require('./errors/DocumentNotFoundError');
-const { createUser, login } = require('./controllers/users');
-const { auth } = require('./middlewares/auth');
+const limiter = require('./utils/limiter');
+const routes = require('./routes/index');
 const { errorHandler } = require('./middlewares/errorHandler');
-const { validationCreateUser, validationLogin } = require('./middlewares/joiValidation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
@@ -17,23 +16,16 @@ app.use(express.json());
 
 mongoose.connect(DB_URL);
 
+app.use(helmet);
 app.use(cors);
 
 app.use(requestLogger);
 
-app.post('/signup', validationCreateUser, createUser);
-app.post('/signin', validationLogin, login);
+app.use(limiter);
 
-app.use(auth);
-
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
+app.use(routes);
 
 app.use(errorLogger);
-
-app.use((req, res, next) => {
-  next(new DocumentNotFoundError('Данная страница не найдена'));
-});
 
 app.use(errors());
 
