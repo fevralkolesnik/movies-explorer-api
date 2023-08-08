@@ -13,7 +13,7 @@ const getMovies = (req, res, next) => {
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        return next(new DocumentNotFoundError(NOT_FOUND.message.getMovies));
+        res.status(200).send([]);
       }
       return next(err);
     });

@@ -45,11 +45,7 @@ const SERVER_ERROR = {
   message: 'Что-то пошло не так',
 };
 
-const RegExp = {
-  URL: /^(https?:\/\/(www\.)?)([-a-zA-Z0-9\W]){1,}/,
-  EN: /[A-z]/,
-  RU: /[А-я]/,
-};
+const RegExpURL = /^(https?:\/\/(www\.)?)([-a-zA-Z0-9\W]){1,}/;
 
 module.exports = {
   BAD_REQUEST,
@@ -58,5 +54,5 @@ module.exports = {
   NOT_FOUND,
   DUPLICATE_KEY_ERROR,
   SERVER_ERROR,
-  RegExp,
+  RegExpURL,
 };
